@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hathern Barber Shop — 115 Loughborough Rd · Walk-in haircuts &amp; hot-towel shaves</title>
+<meta name="description" content="A walk-in barber shop on the A6 in Hathern. Men's haircuts, beard trims, head shaves and hot-towel shaves. 115 Loughborough Rd, Hathern, LE12 5HZ. Call 07380 136739.">
+<meta name="theme-color" content="#1A1714">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#ECE4D2;
+    --paper-warm:#E2D7BF;
+    --ink:#1A1714;
+    --ink-soft:#332B23;
+    --rule:#7A6948;
+    --rule-soft:#B6A57F;
+    --pole-red:#A8331F;
+    --pole-red-deep:#7A2415;
+    --sepia:#6B5A3F;
+    --display:"Big Shoulders Display","Arial Narrow",sans-serif;
+    --body:"Newsreader",Georgia,serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:var(--body);
+    font-size:clamp(1rem,.85rem + .35vw,1.125rem);
+    line-height:1.5;
+    color:var(--ink);
+    background:var(--paper);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  /* paper grain overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;z-index:60;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .4 0'/></filter><rect width='100%' height='100%' filter='url(%23g)' opacity='.5'/></svg>");
+    opacity:.16;
+    mix-blend-mode:multiply;
+  }
+  a{color:inherit;text-decoration:none}
+  p{margin:0 0 1em;text-wrap:pretty;hyphens:auto}
+  h1,h2,h3{margin:0;text-wrap:balance;font-family:var(--display);letter-spacing:-.005em;text-transform:uppercase}
+
+  /* ===== Status bar ===== */
+  .status{
+    background:var(--ink);
+    color:var(--paper);
+    border-bottom:2px solid var(--pole-red);
+    font-family:var(--mono);
+    font-size:.7rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+  }
+  .status__inner{
+    max-width:1240px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    padding:.6rem 1.25rem;
+    flex-wrap:wrap;
+  }
+  .status__open{display:inline-flex;align-items:center;gap:.6rem}
+  .status__dot{
+    width:.55rem;height:.55rem;border-radius:50%;
+    background:#7BBF6A;
+    box-shadow:0 0 0 3px rgba(123,191,106,.22);
+  }
+  .status[data-open="false"] .status__dot{
+    background:#C7682A;
+    box-shadow:0 0 0 3px rgba(199,104,42,.22);
+  }
+  .status a{border-bottom:1px dotted rgba(236,228,210,.4);padding-bottom:1px}
+  .status a:hover{border-bottom-color:var(--paper)}
+
+  /* ===== Masthead — sign-painted type-as-art ===== */
+  .mast{
+    position:relative;
+    padding:clamp(2.5rem,7vw,6rem) clamp(1.25rem,4vw,3rem) clamp(2rem,5vw,4rem);
+    border-bottom:1px solid var(--rule-soft);
+    overflow:hidden;
+  }
+  .mast__estd{
+    font-family:var(--mono);
+    font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--sepia);
+    margin-bottom:1rem;
+    display:flex;align-items:center;gap:.85rem;flex-wrap:wrap;
+  }
+  .mast__estd::before, .mast__estd::after{
+    content:"";flex:0 1 60px;height:1px;background:var(--rule-soft);
+  }
+  .mast__estd::before{flex:0 0 22px}
+  .mast h1{
+    font-weight:900;
+    font-size:clamp(4rem,17vw,15rem);
+    line-height:.82;
+    letter-spacing:-.02em;
+    margin:0 0 .25rem;
+    color:var(--ink);
+  }
+  .mast h1 .second{
+    display:block;
+    font-weight:500;
+    font-size:clamp(2rem,7vw,6rem);
+    line-height:.95;
+    letter-spacing:.04em;
+    color:var(--pole-red);
+    margin-top:.4rem;
+  }
+  .mast__sub{
+    font-family:var(--body);
+    font-style:italic;
+    font-size:clamp(1.15rem,1.2vw + .8rem,1.6rem);
+    line-height:1.35;
+    max-width:46ch;
+    color:var(--ink-soft);
+    margin-top:clamp(1.5rem,3vw,2.5rem);
+  }
+  .mast__under{
+    margin-top:clamp(1.5rem,3vw,2.25rem);
+    display:flex;gap:clamp(1.5rem,3vw,3rem);flex-wrap:wrap;align-items:baseline;
+  }
+  .mast__under .pill-where{
+    font-family:var(--mono);
+    font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--sepia);
+  }
+  .mast__under .pill-where strong{
+    color:var(--ink);font-weight:500;display:block;font-size:1rem;letter-spacing:.04em;margin-top:.2rem;
+  }
+
+  /* barber pole diagonal stripe — used as section dividers */
+  .pole{
+    height:14px;
+    background:
+      repeating-linear-gradient(
+        -55deg,
+        var(--pole-red)        0 14px,
+        var(--paper)            14px 28px,
+        var(--ink)              28px 42px,
+        var(--paper)            42px 56px
+      );
+    background-size:200% 100%;
+    animation:pole 18s linear infinite;
+  }
+  @keyframes pole{ to{ background-position:-400% 0; } }
+  @media (prefers-reduced-motion: reduce){ .pole{animation:none} }
+
+  /* ===== Marquee — opening hours ticker ===== */
+  .marquee{
+    overflow:hidden;
+    background:var(--ink);
+    color:var(--paper);
+    --speed:42s;
+    border-block:1px solid #000;
+  }
+  .marquee__track{
+    display:inline-flex;gap:3.5rem;white-space:nowrap;
+    padding:.95rem 0;
+    font-family:var(--display);font-weight:700;font-size:clamp(1.1rem,1.5vw + .6rem,1.8rem);
+    letter-spacing:.06em;text-transform:uppercase;
+    animation:scroll var(--speed) linear infinite;
+  }
+  @keyframes scroll{ to{ transform:translateX(-50%); } }
+  .marquee__track span{display:inline-flex;align-items:center;gap:3.5rem}
+  .marquee__track .dot{display:inline-block;width:.4rem;height:.4rem;background:var(--pole-red);border-radius:50%;transform:translateY(-.25em)}
+  @media (prefers-reduced-motion: reduce){ .marquee__track{animation:none} }
+
+  /* ===== Layout shell ===== */
+  .wrap{
+    max-width:1240px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem);
+  }
+  section{padding:clamp(3rem,6vw,5.5rem) 0}
+
+  /* ===== Call — asymmetric phone-as-hero ===== */
+  .call{
+    background:var(--paper-warm);
+    border-block:1px solid var(--rule-soft);
+  }
+  .call__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(1.5rem,3vw,3rem);
+    align-items:end;
+  }
+  @media (min-width:760px){
+    .call__grid{grid-template-columns:1.4fr .9fr}
+  }
+  .call h2{
+    font-weight:900;font-size:clamp(1.1rem,1vw + .6rem,1.4rem);
+    letter-spacing:.22em;
+    color:var(--sepia);
+    margin-bottom:1rem;
+  }
+  .call .tel{
+    display:inline-block;
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(2.8rem,8.5vw,7rem);line-height:.95;letter-spacing:-.01em;
+    color:var(--ink);
+    border-bottom:6px solid var(--pole-red);
+    padding-bottom:.3rem;
+    transition:transform .35s ease, border-color .25s ease;
+  }
+  .call .tel:hover{transform:translateY(-3px);border-bottom-color:var(--ink)}
+  .call__copy{
+    font-family:var(--body);
+    font-size:clamp(1.05rem,.6vw + .9rem,1.25rem);
+    line-height:1.55;
+    color:var(--ink-soft);
+  }
+  .call__copy em{font-style:italic;color:var(--pole-red-deep)}
+
+  /* ===== Services — editorial price-list (no prices, unverified) ===== */
+  .services{
+    background:var(--paper);
+  }
+  .services__head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    gap:1rem;margin-bottom:clamp(2rem,3vw,3rem);
+    padding-bottom:1rem;border-bottom:1px solid var(--rule);
+  }
+  .services__head h2{
+    font-weight:900;
+    font-size:clamp(2.2rem,5vw,4rem);
+    letter-spacing:-.01em;
+  }
+  .services__head .meta{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sepia);
+  }
+  .menu{
+    list-style:none;padding:0;margin:0;
+    display:flex;flex-direction:column;
+  }
+  .menu li{
+    display:grid;
+    grid-template-columns:auto 1fr auto;
+    align-items:baseline;
+    gap:1rem;
+    padding:.95rem 0;
+    border-bottom:1px dotted var(--rule);
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.4rem,2vw + .8rem,2.6rem);
+    letter-spacing:.01em;
+  }
+  .menu li:last-child{border-bottom:0}
+  .menu .num{
+    font-family:var(--mono);
+    font-size:.85rem;letter-spacing:.1em;
+    color:var(--sepia);
+    align-self:center;
+    padding-top:.4rem;
+  }
+  .menu .name{color:var(--ink)}
+  .menu .note{
+    justify-self:end;
+    font-family:var(--body);
+    font-style:italic;
+    font-size:clamp(.95rem,.4vw + .85rem,1.1rem);
+    color:var(--sepia);
+    letter-spacing:0;
+    text-transform:none;
+    font-weight:400;
+    max-width:18ch;
+    text-align:right;
+  }
+  /* scroll-driven reveal where supported */
+  @supports (animation-timeline: view()){
+    .menu li{
+      animation:slideUp both;
+      animation-timeline:view();
+      animation-range:entry 0% cover 25%;
+    }
+    @keyframes slideUp{
+      from{opacity:0;transform:translateX(-.5rem)}
+      to{opacity:1;transform:translateX(0)}
+    }
+  }
+
+  .services__footnote{
+    margin-top:2rem;
+    font-family:var(--mono);
+    font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--sepia);
+  }
+
+  /* ===== Hours grid ===== */
+  .hours{
+    background:var(--ink);
+    color:var(--paper);
+    position:relative;
+  }
+  .hours__head{
+    display:flex;justify-content:space-between;align-items:baseline;gap:1rem;flex-wrap:wrap;
+    padding-bottom:1.5rem;border-bottom:1px solid #3a3128;margin-bottom:clamp(1.5rem,3vw,2.5rem);
+  }
+  .hours__head h2{
+    font-weight:900;font-size:clamp(2.2rem,5vw,4rem);letter-spacing:-.01em;
+  }
+  .hours__head .meta{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rule-soft);
+  }
+  .hours__grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:1px;background:#3a3128;border:1px solid #3a3128;
+  }
+  .hours__cell{
+    background:var(--ink);
+    padding:1.15rem 1rem;
+    display:flex;flex-direction:column;gap:.4rem;
+    transition:background .25s ease;
+  }
+  .hours__cell[data-today="true"]{
+    background:var(--pole-red-deep);
+  }
+  .hours__cell .day{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rule-soft);
+  }
+  .hours__cell[data-today="true"] .day{color:#F2C9B8}
+  .hours__cell .h{
+    font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,1.6vw + .6rem,1.8rem);
+    letter-spacing:.01em;color:var(--paper);line-height:1;
+  }
+  .hours__cell .closed{color:var(--rule-soft);font-weight:500}
+
+  /* ===== Find ===== */
+  .find{
+    background:var(--paper);
+  }
+  .find__grid{
+    display:grid;grid-template-columns:1fr;gap:clamp(1.5rem,3vw,3rem);
+    align-items:end;
+  }
+  @media (min-width:820px){
+    .find__grid{grid-template-columns:1.2fr .9fr}
+  }
+  .find h2{
+    font-weight:900;font-size:clamp(2.4rem,6vw,5.5rem);line-height:.95;letter-spacing:-.015em;
+  }
+  .find h2 .post{color:var(--pole-red);display:block;font-size:.6em;letter-spacing:.05em;margin-top:.3em}
+  .find address{
+    font-style:normal;
+    font-family:var(--body);
+    font-size:clamp(1.05rem,.5vw + .9rem,1.2rem);
+    line-height:1.5;
+    color:var(--ink-soft);
+  }
+  .find address .label{
+    font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--sepia);
+    display:block;margin-bottom:.3rem;
+  }
+  .find__map{
+    border:1px solid var(--rule);
+    overflow:hidden;
+    aspect-ratio:4/3;
+    background:var(--paper-warm);
+    position:relative;
+  }
+  .find__map iframe{width:100%;height:100%;border:0;display:block;filter:sepia(.18) contrast(.96) saturate(.85)}
+
+  /* ===== Footer — letterhead ===== */
+  footer{
+    background:var(--ink);
+    color:var(--paper);
+    padding:clamp(2.5rem,5vw,4.5rem) 0 2rem;
+  }
+  footer .wrap{display:grid;gap:clamp(1.5rem,3vw,3rem)}
+  footer .letter{
+    font-family:var(--display);
+    font-weight:500;
+    font-size:clamp(1.5rem,2vw + .8rem,2.4rem);
+    line-height:1.25;letter-spacing:.02em;
+    max-width:32ch;
+  }
+  footer .letter .red{color:var(--pole-red)}
+  footer .meta{
+    display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem;
+    padding-top:2rem;border-top:1px solid #3a3128;
+    font-family:var(--mono);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rule-soft);
+  }
+  footer a{border-bottom:1px dotted rgba(236,228,210,.35);padding-bottom:1px}
+  footer a:hover{border-bottom-color:var(--paper);color:var(--paper)}
+
+  /* selection */
+  ::selection{background:var(--pole-red);color:var(--paper)}
+</style>
+</head>
+<body>
+
+<!-- ============ STATUS BAR ============ -->
+<aside class="status" id="status" data-open="true">
+  <div class="status__inner">
+    <span class="status__open">
+      <span class="status__dot" aria-hidden="true"></span>
+      <span id="statusText">Open today · Walk-in or call</span>
+    </span>
+    <span>
+      <a href="tel:+447380136739">07380&nbsp;136&nbsp;739</a>
+      &nbsp;·&nbsp; 115 Loughborough Rd · LE12 5HZ
+    </span>
+  </div>
+</aside>
+
+<!-- ============ MASTHEAD ============ -->
+<header class="mast">
+  <div class="wrap">
+    <div class="mast__estd">A6 · Hathern Village · Walk-in shop</div>
+    <h1>
+      Hathern
+      <span class="second">Barber Shop</span>
+    </h1>
+    <p class="mast__sub">
+      A village barber on the Loughborough Road. Men's haircuts, beard trims, head shaves and
+      hot-towel finishes — walk in when the door's open, or call ahead if you'd rather wait
+      out the rain.
+    </p>
+    <div class="mast__under">
+      <div class="pill-where">
+        Find us<strong>115 Loughborough Rd, Hathern</strong>
+      </div>
+      <div class="pill-where">
+        Or ring<strong><a href="tel:+447380136739">07380 136 739</a></strong>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="pole" aria-hidden="true"></div>
+
+<!-- ============ MARQUEE — opening hours ticker ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Mon 10–5<span class="dot"></span>Tue 9–6<span class="dot"></span>Wed 9–6<span class="dot"></span>Thu 9–6<span class="dot"></span>Fri 9–6<span class="dot"></span>Sat 9–4<span class="dot"></span>Sun Closed<span class="dot"></span></span>
+    <span>Mon 10–5<span class="dot"></span>Tue 9–6<span class="dot"></span>Wed 9–6<span class="dot"></span>Thu 9–6<span class="dot"></span>Fri 9–6<span class="dot"></span>Sat 9–4<span class="dot"></span>Sun Closed<span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- ============ CALL — phone as hero ============ -->
+<section class="call">
+  <div class="wrap call__grid">
+    <div>
+      <h2>Walk in · or call ahead</h2>
+      <a class="tel" href="tel:+447380136739">07380 136 739</a>
+    </div>
+    <div class="call__copy">
+      <p>
+        Hathern Barber Shop runs <em>walk-in</em>. Turn up during opening hours and you'll
+        be seen in turn. Busy on Saturdays and after-school weekdays — a quick call lets you
+        time your trip.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="pole" aria-hidden="true"></div>
+
+<!-- ============ SERVICES ============ -->
+<section class="services">
+  <div class="wrap">
+    <div class="services__head">
+      <h2>What we cut</h2>
+      <span class="meta">For men · for boys · for the lot</span>
+    </div>
+    <ol class="menu">
+      <li>
+        <span class="num">01</span>
+        <span class="name">Men's haircut</span>
+        <span class="note">Wash · cut · shape, finished how you like it.</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span class="name">Beard trim</span>
+        <span class="note">Tidied, shaped, blended into the cut.</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span class="name">Head shave</span>
+        <span class="note">Full skin shave with the razor.</span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span class="name">Hot towel shave</span>
+        <span class="note">The proper job. Lather, blade, hot towel.</span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span class="name">Boys' haircut</span>
+        <span class="note">Quick, calm, patient with the wriggly ones.</span>
+      </li>
+    </ol>
+    <p class="services__footnote">Prices on the wall in the shop · We take cash and card</p>
+  </div>
+</section>
+
+<!-- ============ HOURS ============ -->
+<section class="hours" id="hours">
+  <div class="wrap">
+    <div class="hours__head">
+      <h2>When we're in</h2>
+      <span class="meta">Closed Sundays · Closed bank holidays unless we say otherwise on the door</span>
+    </div>
+    <div class="hours__grid" id="hoursGrid">
+      <div class="hours__cell" data-day="1"><span class="day">Mon</span><span class="h">10 — 5</span></div>
+      <div class="hours__cell" data-day="2"><span class="day">Tue</span><span class="h">9 — 6</span></div>
+      <div class="hours__cell" data-day="3"><span class="day">Wed</span><span class="h">9 — 6</span></div>
+      <div class="hours__cell" data-day="4"><span class="day">Thu</span><span class="h">9 — 6</span></div>
+      <div class="hours__cell" data-day="5"><span class="day">Fri</span><span class="h">9 — 6</span></div>
+      <div class="hours__cell" data-day="6"><span class="day">Sat</span><span class="h">9 — 4</span></div>
+      <div class="hours__cell" data-day="0"><span class="day">Sun</span><span class="h closed">Closed</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="pole" aria-hidden="true"></div>
+
+<!-- ============ FIND ============ -->
+<section class="find">
+  <div class="wrap find__grid">
+    <div>
+      <h2>
+        On the A6,<br>
+        through the village.
+        <span class="post">LE12 5HZ</span>
+      </h2>
+      <address>
+        <span class="label">Address</span>
+        Hathern Barber Shop<br>
+        115 Loughborough Road<br>
+        Hathern, Loughborough<br>
+        Leicestershire LE12 5HZ
+      </address>
+    </div>
+    <div class="find__map">
+      <iframe
+        loading="lazy"
+        title="Map showing Hathern Barber Shop"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-1.2632%2C52.7880%2C-1.2467%2C52.7960&layer=mapnik&marker=52.7919744%2C-1.2549007"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <p class="letter">
+      Hathern Barber Shop. 115 Loughborough Road, Hathern, Loughborough,
+      Leicestershire LE12 5HZ. <span class="red">Walk in</span> when the door's open,
+      <span class="red">call</span> on <a href="tel:+447380136739">07380 136 739</a>.
+    </p>
+    <div class="meta">
+      <span>© Hathern Barber Shop</span>
+      <span>A6 · Hathern · Charnwood</span>
+      <span><a href="tel:+447380136739">Call the shop</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Open / closed status — vanilla, no framework.
+  // Hours (24h, local time):
+  //  Sun: closed; Mon: 10–17; Tue–Fri: 9–18; Sat: 9–16
+  (function(){
+    var schedule = {0:null, 1:[10,17], 2:[9,18], 3:[9,18], 4:[9,18], 5:[9,18], 6:[9,16]};
+    var now = new Date();
+    var d = now.getDay();
+    var h = now.getHours() + now.getMinutes()/60;
+    var todays = schedule[d];
+    var statusEl = document.getElementById('status');
+    var textEl = document.getElementById('statusText');
+    var openNow = false;
+    if (todays && h >= todays[0] && h < todays[1]) openNow = true;
+
+    function fmt(n){ return n>12 ? (n-12)+'pm' : (n===12 ? '12pm' : n+'am'); }
+
+    if (openNow){
+      textEl.textContent = 'Open now · until ' + fmt(todays[1]) + ' · Walk-in or call';
+      statusEl.setAttribute('data-open','true');
+    } else {
+      // find next open slot
+      var next = null, daysAhead = 0;
+      for (var i=0;i<8;i++){
+        var di = (d+i) % 7;
+        var s = schedule[di];
+        if (s){
+          if (i===0 && h < s[0]){ next = {label:'today at '+fmt(s[0]), open:s[0]}; break; }
+          if (i>0){ next = {label:(i===1?'tomorrow':['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][di])+' '+fmt(s[0]), open:s[0]}; break; }
+        }
+      }
+      textEl.textContent = next ? 'Closed now · opens ' + next.label : 'Closed today';
+      statusEl.setAttribute('data-open','false');
+    }
+
+    // Highlight today's column in hours grid
+    var cell = document.querySelector('.hours__cell[data-day="'+d+'"]');
+    if (cell) cell.setAttribute('data-today','true');
+  })();
+</script>
+
+</body>
+</html>
